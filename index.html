@@ -89,15 +89,25 @@
       <!-- Search fields -->
       <div class="search-fields">
         <div class="search-field">
-          <input type="text" placeholder="Nhập tên đối tượng" />
+          <input
+            type="text"
+            placeholder="Nhập tên đối tượng"
+            onblur="getName()"
+            id="name"
+          />
           <div class="field-label">Tên đối tượng</div>
         </div>
         <div class="search-field">
-          <input type="text" placeholder="CCCD" />
+          <div type="text" placeholder="CCCD"></div>
           <div class="field-label">CCCD</div>
         </div>
         <div class="search-field">
-          <input type="text" placeholder="Căn cước công dân" />
+          <input
+            type="text"
+            id="cccd"
+            placeholder="Căn cước công dân"
+            onblur="getCccd()"
+          />
           <div class="field-label">Căn cước công dân</div>
         </div>
       </div>
@@ -106,9 +116,9 @@
       <div class="case-details">
         <div class="case-info">
           <div>Tên:</div>
-          <div></div>
+          <div id="name-value"></div>
           <div>CCCD:</div>
-          <div></div>
+          <div id="cccd-value"></div>
           <div>Tội danh:</div>
           <div id="offenses"></div>
           <div>Mức án:</div>

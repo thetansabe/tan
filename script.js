@@ -8,15 +8,23 @@ const data = [type1, type2, type3, type4, type5];
 // main logic
 let name = "";
 let id = "";
-const offenses = [];
+let offenses = [];
 let charges = 0;
 const flatten = data.flat();
 
 const addOffense = (id) => {
+  console.log(id);
   const item = flatten.find((item) => item.id === id);
-  offenses.push(item);
-  charges += item.point;
-  item.isSelected = !item.isSelected;
+
+  if (!item.isSelected) {
+    offenses.push(item);
+    charges += item.point;
+    item.isSelected = !item.isSelected;
+  } else {
+    offenses = offenses.filter((offense) => offense.id !== id);
+    charges -= item.point;
+    item.isSelected = !item.isSelected;
+  }
 
   // update UI
   document.querySelector("#charges").innerHTML = charges;
@@ -37,8 +45,20 @@ function copyToClipboard() {
     });
 }
 
+function getName() {
+  name = document.querySelector("#name").value;
+  document.querySelector("#name-value").innerHTML = name;
+}
+
+function getCccd() {
+  id = document.querySelector("#cccd").value;
+  document.querySelector("#cccd-value").innerHTML = id;
+}
+
 window.addOffense = addOffense;
 window.copyToClipboard = copyToClipboard;
+window.getName = getName;
+window.getCccd = getCccd;
 
 // render logic
 
