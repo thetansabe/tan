@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal Administrative Interface</title>
+    <!-- import ./style.css-->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo-container">
+        <div class="logo"></div>
+        <span>LSSD_HRM</span>
+      </div>
+      <nav>
+        <a href="#">Chấm Công</a>
+        <a href="#">Luật Hình Sự</a>
+        <a href="#">Nguyên Tắc Ngành</a>
+        <a href="#">Hỗ trợ xử án</a>
+        <a href="#">Hỗ trợ truy nã</a>
+        <a href="#">Tương Tác Giao Thông</a>
+        <a href="#">Quy tắc Sống điền</a>
+      </nav>
+      <div class="user-info">
+        <div class="user-avatar">L</div>
+        <span>Luật Sama</span>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <div class="container">
+      <!-- Rules section -->
+      <div class="rules">
+        <ul>
+          <li>
+            Khi xử các tội danh bắt buộc phải kèm phạt bìi tương ứng với tội
+            danh đó. Đối với trường hợp vi phạm từ <strong>CẤP ĐỘ 2</strong> trở
+            lên, nếu kiểm tra Công dân đang nợ quá 5 bìi thì quy thêm tội
+            <strong>VI PHẠM LUẬT TIÊU DÙNG</strong>, tính thêm 5 phút tù/1 bìi
+            nợ
+          </li>
+          <li>
+            Khi xử lý hình sự cần kiểm tra Giấy phép Nghĩa vụ quân sự của công
+            dân. Nếu có công dân có Giấy phép Nghĩa vụ quân sự thì được MIỄN tội
+            danh Tân trú vù khi nóng trái phép và Sử dụng vũ khí nóng trái phép
+            (chụp lại hình ảnh có giấy NVQS)
+          </li>
+          <li>
+            Đối với các tội danh liên quan đến Gây thương tích, sử dụng vũ khí
+            cần kiểm tra người Công dân và yêu cầu Công dân nộp lại hung khí gây
+            án, nếu không sẽ quy tội danh Không giao nộp hung khí gây án trừ
+            trường hợp có Bằng chứng Công dân đã làm rơi vũ khí
+          </li>
+          <li>
+            Không tịch thu Vũ khí thô sơ trong trường hợp Công dân chỉ tàng trữ
+            trong người mà không lấy ra sử dụng
+          </li>
+        </ul>
+      </div>
+
+      <!-- Checkboxes row -->
+      <div class="checkbox-row">
+        <div class="checkbox-group">
+          <input type="number" value="5" />
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="violation" />
+          <label for="violation">Vi phạm luật tiêu dùng</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="number" value="10" />
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="cooperation" />
+          <label for="cooperation">Có hợp tác</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="surrender" />
+          <label for="surrender">Chỉ có tội tàng trữ vũ khí nóng</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="military" />
+          <label for="military">Có giấy Nghĩa vụ quân sự</label>
+        </div>
+      </div>
+
+      <!-- Search fields -->
+      <div class="search-fields">
+        <div class="search-field">
+          <input type="text" placeholder="Nhập tên đối tượng" />
+          <div class="field-label">Tên đối tượng</div>
+        </div>
+        <div class="search-field">
+          <input type="text" placeholder="CCCD" />
+          <div class="field-label">CCCD</div>
+        </div>
+        <div class="search-field">
+          <input type="text" placeholder="Căn cước công dân" />
+          <div class="field-label">Căn cước công dân</div>
+        </div>
+      </div>
+
+      <!-- Red bordered section -->
+      <div class="case-details">
+        <div class="case-info">
+          <div>Tên:</div>
+          <div></div>
+          <div>CCCD:</div>
+          <div></div>
+          <div>Tội danh:</div>
+          <div id="offenses"></div>
+          <div>Mức án:</div>
+          <div id="charges"></div>
+          <div>Đã xử lý</div>
+          <div></div>
+        </div>
+        <div class="copy-button">
+          <button onclick="copyToClipboard()">
+            Nhấn vào đây để sao chép tội danh
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Collapsible sections -->
+      </div>
+    </div>
+  </body>
+
+  <!-- import ./script.js -->
+  <script type="module" src="./script.js"></script>
+</html>
