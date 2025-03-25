@@ -11,26 +11,40 @@ let id = "";
 let offenses = [];
 let charges = 0;
 const flatten = data.flat();
+let currAddedItems = [];
 
-const addOffense = (id) => {
-  console.log(id);
-  const item = flatten.find((item) => item.id === id);
-
-  if (!item.isSelected) {
+function calSum() {
+  // reset
+  offenses = [];
+  charges = 0;
+  currAddedItems.forEach((item) => {
     offenses.push(item);
-    charges += item.point;
-    item.isSelected = !item.isSelected;
-  } else {
-    offenses = offenses.filter((offense) => offense.id !== id);
-    charges -= item.point;
-    item.isSelected = !item.isSelected;
-  }
+    charges += item.point * item.quantity;
+  });
+}
 
+function render() {
   // update UI
   document.querySelector("#charges").innerHTML = charges;
   document.querySelector("#offenses").innerHTML = offenses
     .map((item) => item.name)
     .join(" + ");
+}
+
+const addOffense = (id) => {
+  console.log(id);
+  const item = flatten.find((item) => item.id === id);
+  item.isSelected = !item.isSelected;
+
+  if (item.isSelected) {
+    currAddedItems.push(item);
+  } else {
+    currAddedItems = currAddedItems.filter((item) => item.id !== id);
+  }
+
+  calSum();
+
+  render();
 };
 
 function copyToClipboard() {
@@ -55,6 +69,86 @@ function getCccd() {
   document.querySelector("#cccd-value").innerHTML = id;
 }
 
+function increase(id, value) {
+  console.log("increase", id, value);
+  const item = flatten.find((item) => item.id === id);
+  item.quantity = parseInt(value);
+  calSum();
+  render();
+}
+
+function addRule(rule) {
+  const item = currAddedItems.find((item) => item.id === rule);
+
+  if (item) {
+    currAddedItems = currAddedItems.filter((item) => item.id !== rule);
+    calSum();
+    render();
+    return;
+  }
+
+  let newItem = {};
+  switch (rule) {
+    case "military":
+      // newItem = {
+      //   id: "military",
+      //   name: "Có giấy nghĩa vụ",
+      //   quantity: 1,
+      //   isSelected: true,
+      //   point: 20,
+      //   type: 0,
+      // };
+      break;
+    case "weapons":
+      newItem = {
+        id: "weapons",
+        name: "Tàng trữ vũ khí nóng trái phép",
+        quantity: 1,
+        isSelected: true,
+        point: 50,
+        type: 0,
+      };
+      break;
+    case "cooperation":
+      const coop = document.querySelector("#cooperation-num").value;
+      newItem = {
+        id: "cooperation",
+        name: `(Giảm ${coop} phút hợp tác)`,
+        quantity: 1,
+        isSelected: true,
+        point: -parseInt(coop),
+        type: 0,
+      };
+      break;
+    case "violation":
+      if (currAddedItems.find((item) => item.type === 1)) {
+        const violationBox = document.querySelector("#violation");
+        violationBox.checked = false;
+        return;
+      }
+      const violate = document.querySelector("#violation-num").value;
+      newItem = {
+        id: "violation",
+        name: `Vi phạm luật người tiêu dùng (${violate} bill)`,
+        quantity: parseInt(violate),
+        isSelected: true,
+        point: 5,
+        type: 0,
+      };
+      break;
+    default:
+      break;
+  }
+
+  if (!newItem?.id) return;
+
+  currAddedItems.push(newItem);
+  calSum();
+  render();
+}
+
+window.addRule = addRule;
+window.increase = increase;
 window.addOffense = addOffense;
 window.copyToClipboard = copyToClipboard;
 window.getName = getName;
@@ -70,12 +164,20 @@ data.forEach((type, index) => {
                 <td>${item.name}</td>
                 <td>
                     <div class="number-checkbox">
-                        <input
-                        type="number"
-                        value="${item.quantity}"
-                        style="width: 48px; height: 32px"
-                        />
-                        <input type="checkbox" onclick="addOffense('${item.id}')"/>
+                        ${
+                          item?.changeable
+                            ? `<input
+                              type="number"
+                              value="${item.quantity}"
+                              min="1"
+                              style="width: 48px; height: 32px"
+                              onchange="increase('${item.id}', this.value)"
+                            />`
+                            : ""
+                        }
+                        <input type="checkbox" onclick="addOffense('${
+                          item.id
+                        }')"/>
                     </div>
                 </td>
             </tr>

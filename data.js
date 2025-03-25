@@ -188,6 +188,7 @@ const type3 = [
     isSelected: false,
     point: 60,
     type: 3,
+    changeable: true,
   },
   {
     id: "24",
@@ -204,6 +205,7 @@ const type3 = [
     isSelected: false,
     point: 60,
     type: 3,
+    changeable: true,
   },
   {
     id: "26",
@@ -212,6 +214,7 @@ const type3 = [
     isSelected: false,
     point: 60,
     type: 3,
+    changeable: true,
   },
   {
     id: "27",
@@ -220,6 +223,7 @@ const type3 = [
     isSelected: false,
     point: 60,
     type: 3,
+    changeable: true,
   },
   {
     id: "28",
@@ -228,6 +232,7 @@ const type3 = [
     isSelected: false,
     point: 60,
     type: 3,
+    changeable: true,
   },
   {
     id: "29",
@@ -236,6 +241,7 @@ const type3 = [
     isSelected: false,
     point: 60,
     type: 3,
+    changeable: true,
   },
   {
     id: "30",
@@ -263,6 +269,7 @@ const type4 = [
     isSelected: false,
     point: 120,
     type: 4,
+    changeable: true,
   },
   {
     id: "33",
@@ -290,6 +297,7 @@ const type5 = [
     isSelected: false,
     point: 200,
     type: 5,
+    changeable: true,
   },
   {
     id: "36",
@@ -306,6 +314,7 @@ const type5 = [
     isSelected: false,
     point: 200,
     type: 5,
+    changeable: true,
   },
   {
     id: "38",

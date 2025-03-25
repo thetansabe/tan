@@ -12,16 +12,10 @@
     <header>
       <div class="logo-container">
         <div class="logo"></div>
-        <span>LSSD_HRM</span>
+        <span>LSPD</span>
       </div>
       <nav>
-        <a href="#">Chấm Công</a>
-        <a href="#">Luật Hình Sự</a>
-        <a href="#">Nguyên Tắc Ngành</a>
         <a href="#">Hỗ trợ xử án</a>
-        <a href="#">Hỗ trợ truy nã</a>
-        <a href="#">Tương Tác Giao Thông</a>
-        <a href="#">Quy tắc Sống điền</a>
       </nav>
       <div class="user-info">
         <div class="user-avatar">L</div>
@@ -63,25 +57,33 @@
       <!-- Checkboxes row -->
       <div class="checkbox-row">
         <div class="checkbox-group">
-          <input type="number" value="5" />
+          <input type="number" value="5" id="violation-num" />
         </div>
         <div class="checkbox-group">
-          <input type="checkbox" id="violation" />
+          <input
+            type="checkbox"
+            id="violation"
+            onclick="addRule('violation')"
+          />
           <label for="violation">Vi phạm luật tiêu dùng</label>
         </div>
         <div class="checkbox-group">
-          <input type="number" value="10" />
+          <input type="number" value="10" id="cooperation-num" />
         </div>
         <div class="checkbox-group">
-          <input type="checkbox" id="cooperation" />
+          <input
+            type="checkbox"
+            id="cooperation"
+            onclick="addRule('cooperation')"
+          />
           <label for="cooperation">Có hợp tác</label>
         </div>
         <div class="checkbox-group">
-          <input type="checkbox" id="surrender" />
+          <input type="checkbox" id="surrender" onclick="addRule('weapons')" />
           <label for="surrender">Chỉ có tội tàng trữ vũ khí nóng</label>
         </div>
         <div class="checkbox-group">
-          <input type="checkbox" id="military" />
+          <input type="checkbox" id="military" onclick="addRule('military')" />
           <label for="military">Có giấy Nghĩa vụ quân sự</label>
         </div>
       </div>
