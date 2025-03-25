@@ -27,7 +27,12 @@ function render() {
   // update UI
   document.querySelector("#charges").innerHTML = charges;
   document.querySelector("#offenses").innerHTML = offenses
-    .map((item) => item.name)
+    .map((item) => {
+      if (item.name === "Sử dụng vũ khí nóng nơi công cộng") {
+        return "Sử dụng vũ khí nóng nơi công cộng+Tàng trữ vũ khí nóng trái phép+Sử dụng vũ khí nóng trái phép";
+      }
+      return item.name;
+    })
     .join(" + ");
 }
 
@@ -92,10 +97,10 @@ function addRule(rule) {
     case "military":
       // newItem = {
       //   id: "military",
-      //   name: "Có giấy nghĩa vụ",
+      //   name: "Sử dụng vũ khí nóng nơi công cộng(Có giấy NVQS)",
       //   quantity: 1,
       //   isSelected: true,
-      //   point: 20,
+      //   point: 30,
       //   type: 0,
       // };
       break;

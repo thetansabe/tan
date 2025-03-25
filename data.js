@@ -127,7 +127,7 @@ const type2 = [
     name: "Sử dụng vũ khí nóng nơi công cộng",
     quantity: 1,
     isSelected: false,
-    point: 30,
+    point: 90,
     type: 2,
   },
   {
@@ -304,7 +304,7 @@ const type5 = [
     name: "Lợi dụng quyền ra toà để bỏ trốn hoặc bỏ trốn trong thời gian được tại ngoại chờ ra toà",
     quantity: 1,
     isSelected: false,
-    point: 200,
+    point: 180,
     type: 5,
   },
   {
@@ -321,7 +321,7 @@ const type5 = [
     name: "Tấn công Thống Đốc, Phó Thống Đốc, Nhân viên Chính Phủ",
     quantity: 1,
     isSelected: false,
-    point: 200,
+    point: 500,
     type: 5,
   },
   {
@@ -329,7 +329,7 @@ const type5 = [
     name: "Đột nhập Trụ sở làm việc Học Viện Quốc Gia",
     quantity: 1,
     isSelected: false,
-    point: 200,
+    point: 180,
     type: 5,
   },
   {
@@ -337,7 +337,7 @@ const type5 = [
     name: "Đột nhập Trụ sở làm việc Nhà Tù (hoặc Quân khu)",
     quantity: 1,
     isSelected: false,
-    point: 200,
+    point: 180,
     type: 5,
   },
 ];
