@@ -116,20 +116,21 @@
       <!-- Red bordered section -->
       <div class="case-details">
         <div class="case-info">
-          <div>Tên:</div>
-          <div id="name-value"></div>
-          <div>CCCD:</div>
-          <div id="cccd-value"></div>
-          <div>Tội danh:</div>
-          <div id="offenses"></div>
-          <div>Mức án:</div>
-          <div id="charges"></div>
+          <div>Tên: <span id="name-value"></span></div>
+
+          <div>CCCD: <span id="cccd-value"></span></div>
+
+          <div>Tội danh: <span id="offenses"></span></div>
+
+          <div>Mức án: <span id="charges"></span></div>
+
           <div>Đã xử lý</div>
           <div></div>
         </div>
         <div class="copy-button">
-          <button onclick="copyToClipboard()">
-            Nhấn vào đây để sao chép tội danh
+          <button onclick="copyOffenses()">Nhấn vào đây để sao chép</button>
+          <button onclick="copyCharges()" style="color: brown">
+            Nhấn vào đây để sao chép số phút
           </button>
         </div>
       </div>

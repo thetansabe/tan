@@ -17,23 +17,47 @@ function calSum() {
   // reset
   offenses = [];
   charges = 0;
+
+  const specialSumItems = currAddedItems.filter(
+    (item) => item.id == "37" || item.id === "35"
+  );
+
   currAddedItems.forEach((item) => {
     offenses.push(item);
+    if (
+      item.id !== "37" &&
+      item.id !== "35" &&
+      charges + item.point * item.quantity <= 500
+    ) {
+      charges += item.point * item.quantity;
+    } else if (charges + item.point * item.quantity > 500) {
+      charges = 500;
+    }
+  });
+
+  specialSumItems.forEach((item) => {
     charges += item.point * item.quantity;
   });
+}
+
+function printOffense() {
+  return offenses
+    .map((item) => {
+      if (item.name === "Sử dụng vũ khí nóng nơi công cộng") {
+        return "Sử dụng vũ khí nóng nơi công cộng+Tàng trữ vũ khí nóng trái phép+Sử dụng vũ khí nóng trái phép";
+      }
+      if (item.changeable) {
+        return item.name + `(x${item.quantity})`;
+      }
+      return item.name;
+    })
+    .join(" + ");
 }
 
 function render() {
   // update UI
   document.querySelector("#charges").innerHTML = charges;
-  document.querySelector("#offenses").innerHTML = offenses
-    .map((item) => {
-      if (item.name === "Sử dụng vũ khí nóng nơi công cộng") {
-        return "Sử dụng vũ khí nóng nơi công cộng+Tàng trữ vũ khí nóng trái phép+Sử dụng vũ khí nóng trái phép";
-      }
-      return item.name;
-    })
-    .join(" + ");
+  document.querySelector("#offenses").innerHTML = printOffense();
 }
 
 const addOffense = (id) => {
@@ -52,8 +76,7 @@ const addOffense = (id) => {
   render();
 };
 
-function copyToClipboard() {
-  const text = offenses.map((item) => item.name).join(" + ");
+function copyToClipboard(text) {
   navigator.clipboard
     .writeText(text)
     .then(() => {
@@ -82,9 +105,34 @@ function increase(id, value) {
   render();
 }
 
+function copyCharges() {
+  copyToClipboard(charges);
+}
+
+function copyOffenses() {
+  const textOffense = printOffense();
+  const all =
+    "Tên: " +
+    name +
+    "\n" +
+    "CCCD: " +
+    id +
+    "\n" +
+    "Tội danh: " +
+    textOffense +
+    "\n" +
+    "Mức án: " +
+    charges +
+    "\n" +
+    "Đã xử lý";
+  copyToClipboard(all);
+}
+
+let militaryState = false;
+
 function addRule(rule) {
   const item = currAddedItems.find((item) => item.id === rule);
-
+  console.log("mil", militaryState);
   if (item) {
     currAddedItems = currAddedItems.filter((item) => item.id !== rule);
     calSum();
@@ -95,22 +143,46 @@ function addRule(rule) {
   let newItem = {};
   switch (rule) {
     case "military":
-      // newItem = {
-      //   id: "military",
-      //   name: "Sử dụng vũ khí nóng nơi công cộng(Có giấy NVQS)",
-      //   quantity: 1,
-      //   isSelected: true,
-      //   point: 30,
-      //   type: 0,
-      // };
-      break;
+      console.log("mil after click", militaryState);
+      const specialItem = currAddedItems.find((item) => item.id === "16");
+      const militaryBox = document.querySelector("#military");
+      militaryState = militaryBox.checked;
+      if (!specialItem) {
+        militaryBox.checked = false;
+        militaryState = false;
+        return;
+      }
+      let updatedItem16 = {};
+      if (militaryState) {
+        updatedItem16 = {
+          ...specialItem,
+          name: "Sử dụng vũ khí nóng nơi công cộng(Có giấy NVQS)",
+          point: 30,
+        };
+        currAddedItems = currAddedItems.map((item) =>
+          item.id === "16" ? updatedItem16 : item
+        );
+      } else {
+        updatedItem16 = {
+          ...specialItem,
+          name: "Sử dụng vũ khí nóng nơi công cộng",
+          point: 90,
+        };
+        currAddedItems = currAddedItems.map((item) =>
+          item.id === "16" ? updatedItem16 : item
+        );
+      }
+
+      calSum();
+      render();
+      return;
     case "weapons":
       newItem = {
         id: "weapons",
         name: "Tàng trữ vũ khí nóng trái phép",
         quantity: 1,
         isSelected: true,
-        point: 50,
+        point: 30,
         type: 0,
       };
       break;
@@ -155,7 +227,8 @@ function addRule(rule) {
 window.addRule = addRule;
 window.increase = increase;
 window.addOffense = addOffense;
-window.copyToClipboard = copyToClipboard;
+window.copyCharges = copyCharges;
+window.copyOffenses = copyOffenses;
 window.getName = getName;
 window.getCccd = getCccd;
 

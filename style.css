@@ -165,9 +165,6 @@ input[type="number"] {
 }
 
 .case-info {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 8px;
 }
 
 .copy-button {
